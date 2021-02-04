@@ -10,7 +10,8 @@ function Usuario(props) {
         <li><strong>Nome:</strong> {props.usuario.nome} {props.usuario.sobrenome}</li>
         <li><strong>Email:</strong> {props.usuario.email}</li>
       </ul>
-      <button onClick={props.removerUsuario}>&times;</button>
+      <button onClick={props.removerUsuario}>&times;</button> 
+      {/* recebe o props com a função de remover */}
     </div>
   )
 }
