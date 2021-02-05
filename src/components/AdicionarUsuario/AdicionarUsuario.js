@@ -1,31 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component , useState} from 'react'
 
 import './AdicionarUsuario.css'
 
-class AdicionarUsuario extends Component {
+function AdicionarUsuario (props) {
+    const [nome, setNome] = useState('')
+    const [sobrenome, setSobrenome] = useState('')
+    const [email, setEmail] = useState('')
+    
 
-  constructor(props) {
-    super(props)
-
-    this.state = {    //O state começa com os dados vazios
-      usuario: { nome: '', sobrenome: '', email: '' } 
-    }
-
-    this.onChangeHandler = this.onChangeHandler.bind(this)
-    this.onSubmitHandler = this.onSubmitHandler.bind(this)
-  }
-
-  /*Recebe o Name e o value dos inputs para poder receber o que foi digitado pelo usuario */
-  onChangeHandler(event) { 
-    const { name, value } = event.target
-    this.setState({ usuario: { ...this.state.usuario, [name]: value } })
-  }
+  
 /*Ao submeter o formulario ira receber o usuario do estado 
 definir o metodo como POST e transformar o usuario em JSON
 no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
-  onSubmitHandler(event) {
+ const onSubmitHandler = event =>{
     event.preventDefault();
-    const usuario = this.state.usuario
+    const usuario = {
+      nome: nome,
+      sobrenome: sobrenome,
+      email: email}
+
     
     fetch('https://reqres.in/api/users',{
       method: 'POST',
@@ -34,27 +27,28 @@ no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
     })
       .then(resposta => resposta.json())
       .then(dados =>{
-        console.log(dados)
-        this.setState({ usuario: { nome: '', sobrenome: '', email: '' } })
-        this.props.adicionarUsuario(dados)
+        setNome('')
+        setSobrenome('')
+        setEmail('')
+        props.adicionarUsuario(dados)
       })
 
     
   }
 
-  render() {
+ 
     return (
       <div className="AdicionarUsuario">
         <h2>Adicionar Usuário</h2>
-        <form onSubmit={this.onSubmitHandler}>
+        <form onSubmit={onSubmitHandler}>
           <div className="Linha">
             <div className="Coluna">
               <label>Nome</label>
               <input
                 type="text"
                 name="nome"
-                value={this.state.usuario.nome}
-                onChange={this.onChangeHandler}
+                value={nome}
+                onChange={event => setNome(event.target.value)}
                 required>
               </input>
             </div>
@@ -63,8 +57,8 @@ no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
               <input
                 type="text"
                 name="sobrenome"
-                value={this.state.usuario.sobrenome}
-                onChange={this.onChangeHandler}
+                value={sobrenome}
+                onChange={event => setSobrenome(event.target.value)}
                 required>
               </input>
             </div>
@@ -75,8 +69,8 @@ no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
               <input
                 type="email"
                 name="email"
-                value={this.state.usuario.email}
-                onChange={this.onChangeHandler}
+                value={email}
+                onChange={event => setEmail(event.target.value )}
                 required>
               </input>
             </div>
@@ -88,6 +82,6 @@ no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
       </div>
     )
   }
-}
+
 
 export default AdicionarUsuario
