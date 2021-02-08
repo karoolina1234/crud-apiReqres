@@ -57,8 +57,7 @@ function Usuarios () {
  
     return (
       <>
-        <AdicionarUsuario adicionarUsuario={adicionarUsuario} />
-
+       
         {usuarios.map(usuario => (
           <Usuario key={usuario.id}
             usuario={usuario}

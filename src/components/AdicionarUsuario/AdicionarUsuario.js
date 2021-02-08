@@ -2,7 +2,7 @@ import React, { Component , useState} from 'react'
 
 import './AdicionarUsuario.css'
 
-function AdicionarUsuario (props) {
+function AdicionarUsuario () {
     const [nome, setNome] = useState('')
     const [sobrenome, setSobrenome] = useState('')
     const [email, setEmail] = useState('')
@@ -25,14 +25,13 @@ no then ele ira receber a resposta e dps pegar os dados e adicionar no state */
       headers: {'Content-type':'application/json'},
       body: JSON.stringify(usuario)   
     })
-      .then(resposta => resposta.json())
-      .then(dados =>{
-        setNome('')
-        setSobrenome('')
-        setEmail('')
-        props.adicionarUsuario(dados)
+      .then(resposta =>{
+        if(resposta.ok){
+          setNome('')
+          setSobrenome('')
+          setEmail('')
+        }
       })
-
     
   }
 

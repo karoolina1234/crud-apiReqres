@@ -1,3 +1,37 @@
+
+nav{
+  width: 100%;
+  padding: 0;
+  background-color: #ffebf3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .14);
+
+}
+nav ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav ul li {
+  display: block;
+}
+nav ul li a{
+  display: block;
+  padding: 1rem;
+  color:#DA3C78;
+  text-decoration: none;
+  cursor: pointer;
+}
+nav ul li a:hover{
+  color:#FFBCD8;
+}
+nav ul li a:active{
+  background-color:#DA3C78;
+  color:#FFF
+}
 .App {
   width: 100%;
   padding-right: 15px;
